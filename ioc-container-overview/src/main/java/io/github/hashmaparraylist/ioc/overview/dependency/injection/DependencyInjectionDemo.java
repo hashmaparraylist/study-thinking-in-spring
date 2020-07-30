@@ -26,7 +26,7 @@ public class DependencyInjectionDemo {
 //        ApplicationContext beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection-context.xml");
         // 依赖来源一: 自定义 Bean
         UserRepository userRepository = (UserRepository) beanFactory.getBean("userRepository");
-//        System.out.println(userRepository.getUsers());
+        System.out.println(userRepository.getUsers());
 
         whoIsIocContainer(userRepository, beanFactory);
 
