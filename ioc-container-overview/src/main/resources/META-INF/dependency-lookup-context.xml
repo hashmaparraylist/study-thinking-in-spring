@@ -7,6 +7,8 @@
     <bean id="user" class="io.github.hashmaparraylist.ioc.overview.domain.User">
         <property name="id" value="1" />
         <property name="name" value="Sebastian Qu" />
+        <property name="city" value="SHANGHAI" />
+        <property name="configFileLocation" value="classpath:/META-INF/user-config.properties" />
     </bean>
 
     <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
