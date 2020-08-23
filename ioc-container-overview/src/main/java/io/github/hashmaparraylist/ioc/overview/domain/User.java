@@ -1,15 +1,18 @@
 package io.github.hashmaparraylist.ioc.overview.domain;
 
 import io.github.hashmaparraylist.ioc.overview.enums.City;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.io.Resource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  *
  */
-public class User {
+public class User implements BeanNameAware {
     private String name;
 
     private Long id;
@@ -21,6 +24,11 @@ public class User {
     private List<City> lifeCities;
 
     private Resource configFileLocation;
+
+    /**
+     * Spring Bean 的名称
+     */
+    private transient String beanName;
 
     public List<City> getLifeCities() {
         return lifeCities;
@@ -88,5 +96,20 @@ public class User {
         user.setName("createUser");
         user.setCity(City.BEIJING);
         return user;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("User Bean [" + beanName + "] 初始化...");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("User Bean [" + beanName + "] 销毁...");
+    }
+
+    @Override
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
     }
 }
