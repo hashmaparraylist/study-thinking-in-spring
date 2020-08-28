@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="<spring:theme code='styleSheet'/>" type="text/css"/>
 </head>
 <body>
-    \${user.name} : ${user.name}
+    <!-- page -> request -> session -> application(ServletContext) -->
+    \${userObject.name} : ${user.name}
+    \${applicationScope['scopedTarget.user'].name} : ${applicationScope['scopedTarget.user'].name}
 </body>
 </html>
