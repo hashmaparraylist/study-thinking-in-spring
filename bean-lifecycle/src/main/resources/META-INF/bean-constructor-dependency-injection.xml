@@ -4,5 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userHolder" class="io.github.hashmaparraylist.ioc.bean.lifecycle.UserHolder" autowire="constructor" />
+    <bean id="userHolder" class="io.github.hashmaparraylist.ioc.bean.lifecycle.UserHolder" autowire="constructor" >
+<!--        <property name="number" value="1" />-->
+        <property name="description" value="The user holder" />
+    </bean>
 </beans>

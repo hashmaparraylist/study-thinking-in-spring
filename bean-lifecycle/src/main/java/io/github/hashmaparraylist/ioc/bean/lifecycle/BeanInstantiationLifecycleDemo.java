@@ -3,6 +3,9 @@ package io.github.hashmaparraylist.ioc.bean.lifecycle;
 import io.github.hashmaparraylist.ioc.overview.domain.SuperUser;
 import io.github.hashmaparraylist.ioc.overview.domain.User;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.PropertyValue;
+import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -57,6 +60,29 @@ public class BeanInstantiationLifecycleDemo {
                 return false;
             }
             return true;
+        }
+
+        @Override
+        public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
+            if (ObjectUtils.nullSafeEquals("userHolder", beanName) && UserHolder.class.equals(bean.getClass())) {
+                final MutablePropertyValues propertyValues;
+                if (pvs instanceof MutablePropertyValues) {
+                    propertyValues = (MutablePropertyValues) pvs;
+                } else {
+                    propertyValues = new MutablePropertyValues();
+                }
+                // 把配置完成 superUser 替换掉
+                propertyValues.addPropertyValue("number", "1");
+                if (propertyValues.contains("description")) {
+                    // PropertyValue 是只读的属性
+//                    PropertyValue propertyValue = propertyValues.getPropertyValue("description");
+                    propertyValues.removePropertyValue("description");
+                    propertyValues.addPropertyValue("description", "The user holder V2.");
+                }
+                return propertyValues;
+            }
+
+            return null;
         }
     }
 }
