@@ -29,6 +29,8 @@ public class BeanInitializationLifecycleDemo {
         BeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         String[] locations = {"classpath:META-INF/dependency-lookup-context.xml", "classpath:META-INF/bean-constructor-dependency-injection.xml"};
         int beanDefinitionCount = beanDefinitionReader.loadBeanDefinitions(locations);
+
+
         System.out.printf("已加载 BeanDefinition 数量: %d%n", beanDefinitionCount);
 
         User user = beanFactory.getBean("user", User.class);
@@ -39,7 +41,13 @@ public class BeanInitializationLifecycleDemo {
 
         // 构造器注入是按照类型去选择参数， resolveDependency
         UserHolder userHolder = beanFactory.getBean("userHolder", UserHolder.class);
+        
+        // 需要显示回调
+        // SmartInitializingSingleton 通常在ApplicationContext中使用。
+        beanFactory.preInstantiateSingletons();
+
         System.out.println(userHolder);
+
     }
 }
 
