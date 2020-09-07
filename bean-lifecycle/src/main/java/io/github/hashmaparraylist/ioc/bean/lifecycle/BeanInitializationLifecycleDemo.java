@@ -4,6 +4,7 @@ import io.github.hashmaparraylist.ioc.overview.domain.User;
 import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -19,6 +20,8 @@ public class BeanInitializationLifecycleDemo {
 
     public static void executeBeanFactory() {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        // 添加 CommonAnnotationBeanPostProcessor 解决 @PostConstruct 未被调用的问题
+        beanFactory.addBeanPostProcessor(new CommonAnnotationBeanPostProcessor());
         // 方法一:添加 BeanPostProcessor 的实现 MyInstantiationAwareBeanPostProcessor
         beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
         // 方法二:MyInstantiationAwareBeanPostProcessor 作为 Bean 注册

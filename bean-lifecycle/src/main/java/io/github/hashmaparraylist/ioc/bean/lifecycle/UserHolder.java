@@ -2,12 +2,11 @@ package io.github.hashmaparraylist.ioc.bean.lifecycle;
 
 import io.github.hashmaparraylist.ioc.overview.domain.User;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.*;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
+
+import javax.annotation.PostConstruct;
 
 /**
  * TODO
@@ -15,7 +14,7 @@ import org.springframework.core.env.Environment;
  * @author
  * @date 2020/9/2
  */
-public class UserHolder implements BeanNameAware, BeanFactoryAware, BeanClassLoaderAware, EnvironmentAware {
+public class UserHolder implements BeanNameAware, BeanFactoryAware, BeanClassLoaderAware, EnvironmentAware, InitializingBean {
     private final User user;
     private Integer number;
     private String description;
@@ -23,6 +22,27 @@ public class UserHolder implements BeanNameAware, BeanFactoryAware, BeanClassLoa
     private BeanFactory beanFactory;
     private String beanName;
     private Environment environment;
+
+    /**
+     * 依赖于注解驱动
+     * 当前场景: BeanFactory
+     */
+    @PostConstruct
+    public void initPostConstruct() {
+        this.description = "The use holder v4";
+        System.out.printf("initPostConstruct() = %s%n", this.description);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.description = "The user holder v5";
+        System.out.printf("afterPropertiesSet() = %s%n", this.description);
+    }
+
+    public void init() {
+        this.description = "The user holder v6";
+        System.out.printf("init() = %s%n", this.description);
+    }
 
     public UserHolder(User user) {
         this.user = user;
