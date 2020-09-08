@@ -6,7 +6,8 @@
 
     <bean class="io.github.hashmaparraylist.ioc.bean.lifecycle.MyInstantiationAwareBeanPostProcessor" />
 
-    <bean id="userHolder" class="io.github.hashmaparraylist.ioc.bean.lifecycle.UserHolder" autowire="constructor" init-method="init">
+    <bean id="userHolder" class="io.github.hashmaparraylist.ioc.bean.lifecycle.UserHolder" autowire="constructor"
+          init-method="init" destroy-method="doDestroy">
 <!--        <property name="number" value="1" />-->
         <property name="description" value="The user holder" />
     </bean>
