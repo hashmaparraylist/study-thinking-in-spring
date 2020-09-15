@@ -24,6 +24,7 @@ public class AnnotatedSpringIoCContainerMetadataConfigurationDemo {
     public User configuredUser(@Value("${user.id}") Long id, @Value("${user.name}") String name) {
         User user = new User();
         user.setId(id);
+
         user.setName(name);
         return user;
     }
