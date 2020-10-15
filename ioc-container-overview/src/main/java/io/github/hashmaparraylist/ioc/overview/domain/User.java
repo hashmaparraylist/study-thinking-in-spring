@@ -25,6 +25,8 @@ public class User implements BeanNameAware {
 
     private Resource configFileLocation;
 
+    private Company company;
+
     /**
      * Spring Bean 的名称
      */
@@ -78,6 +80,14 @@ public class User implements BeanNameAware {
         this.id = id;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -85,8 +95,9 @@ public class User implements BeanNameAware {
                 ", id=" + id +
                 ", city=" + city +
                 ", workCities=" + Arrays.toString(workCities) +
-                ", lifeCites=" + lifeCities +
+                ", lifeCities=" + lifeCities +
                 ", configFileLocation=" + configFileLocation +
+                ", company=" + company +
                 '}';
     }
 

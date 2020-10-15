@@ -21,6 +21,7 @@
         <module>resource</module>
         <module>i18n</module>
         <module>validation</module>
+        <module>data-binding</module>
     </modules>
 
     <properties>
