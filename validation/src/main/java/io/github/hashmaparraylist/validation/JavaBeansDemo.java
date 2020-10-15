@@ -20,7 +20,7 @@ public class JavaBeansDemo {
         Stream.of(beanInfo.getPropertyDescriptors()).forEach(propertyDescriptor -> {
             System.out.println(propertyDescriptor);
         });
-        
+
         Stream.of(beanInfo.getMethodDescriptors()).forEach(System.out::println);
     }
 }
