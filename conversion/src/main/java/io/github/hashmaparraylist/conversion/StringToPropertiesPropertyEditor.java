@@ -4,6 +4,7 @@ import java.beans.PropertyEditor;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -28,6 +29,19 @@ public class StringToPropertiesPropertyEditor extends PropertyEditorSupport impl
         setValue(properties);
 
         // next 通过 getValue 方法获取 Properties 对象
+    }
+
+    @Override
+    public String getAsText() {
+        Properties properties = (Properties) getValue();
+
+        StringBuilder text = new StringBuilder();
+        
+        for(Map.Entry<Object, Object> entry : properties.entrySet()) {
+            text.append(entry.getKey()).append("=").append(entry.getValue()).append(System.getProperty("line.separator"));
+        }
+
+        return text.toString();
     }
 }
 
