@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="io.github.hashmaparraylist.ioc.overview.domain.User">
+        <property name="id" value="1" />
+        <property name="name" value="Sebastian Qu" />
+        <property name="context"> <!-- Properties 类型 -->
+            <value>
+                id = 1
+                name = Property Test
+            </value>
+        </property>
+    </bean>
+
+    <!-- 3. 将其声明为一个 Spring Bean -->
+    <bean class="io.github.hashmaparraylist.conversion.CustomizedPropertyEditorRegistrar" />
+
+</beans>

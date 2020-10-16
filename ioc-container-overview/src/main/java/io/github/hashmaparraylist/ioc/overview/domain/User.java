@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -26,6 +27,8 @@ public class User implements BeanNameAware {
     private Resource configFileLocation;
 
     private Company company;
+
+    private Properties context;
 
     /**
      * Spring Bean 的名称
@@ -88,6 +91,14 @@ public class User implements BeanNameAware {
         this.company = company;
     }
 
+    public Properties getContext() {
+        return context;
+    }
+
+    public void setContext(Properties context) {
+        this.context = context;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -98,6 +109,7 @@ public class User implements BeanNameAware {
                 ", lifeCities=" + lifeCities +
                 ", configFileLocation=" + configFileLocation +
                 ", company=" + company +
+                ", context=" + context +
                 '}';
     }
 
