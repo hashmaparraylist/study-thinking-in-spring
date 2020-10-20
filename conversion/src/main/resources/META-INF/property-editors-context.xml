@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 3. 将其声明为一个 Spring Bean -->
+    <bean class="io.github.hashmaparraylist.conversion.CustomizedPropertyEditorRegistrar" />
+
+    <!-- 声明 ConversionServiceFactoryBean 并且名称必须为 conversionService -->
+    <bean name="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters" >
+            <bean class="io.github.hashmaparraylist.conversion.PropertiesToStringConverter"/>
+        </property>
+    </bean>
+
+    <util:properties id="context">
+        <prop key="id">1</prop>
+        <prop key="name">hashmaparraylist</prop>
+    </util:properties>
 
     <bean id="user" class="io.github.hashmaparraylist.ioc.overview.domain.User">
         <property name="id" value="1" />
@@ -13,9 +34,7 @@
                 name = Property Test
             </value>
         </property>
+        <property name="contextAsText" ref="context" />
     </bean>
-
-    <!-- 3. 将其声明为一个 Spring Bean -->
-    <bean class="io.github.hashmaparraylist.conversion.CustomizedPropertyEditorRegistrar" />
 
 </beans>

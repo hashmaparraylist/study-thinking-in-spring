@@ -30,6 +30,8 @@ public class User implements BeanNameAware {
 
     private Properties context;
 
+    private String contextAsText;
+
     /**
      * Spring Bean 的名称
      */
@@ -99,6 +101,14 @@ public class User implements BeanNameAware {
         this.context = context;
     }
 
+    public String getContextAsText() {
+        return contextAsText;
+    }
+
+    public void setContextAsText(String contextAsText) {
+        this.contextAsText = contextAsText;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -110,6 +120,7 @@ public class User implements BeanNameAware {
                 ", configFileLocation=" + configFileLocation +
                 ", company=" + company +
                 ", context=" + context +
+                ", contextAsText='" + contextAsText + '\'' +
                 '}';
     }
 
