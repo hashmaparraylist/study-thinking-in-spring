@@ -20,6 +20,14 @@ public class SpringCustomizedPropertyEditorDemo {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/META-INF/property-editors-context.xml");
 
+        // AbstractApplicationContext -> "conversionService" ConversionService Bean
+        // -> ConfigurableBeanFactory#setConversionService(ConversionService)
+        // -> AbstractAutowireCapableBeanFactory.instantiateBean
+        // -> AbstractBeanFactory#getConversionService
+        // BeanDefinition -> BeanWrapper -> 属性转换 (数据来源: PropertyValues)
+        // setPropertyValues(PropertyValue) -> TypeConvert#convertIfNecessary
+        // TypeConvertDelegate#convertIfNecessary -> PropertyEditor or ConversionService
+
         User user = applicationContext.getBean("user", User.class);
         System.out.println(user);
 
