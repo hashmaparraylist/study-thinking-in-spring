@@ -28,7 +28,7 @@ public class GenericCollectionTypeResolverDemo {
         // 获取字段
         Field field = GenericCollectionTypeResolverDemo.class.getDeclaredField("stringList");
         System.out.println(GenericCollectionTypeResolver.getCollectionFieldType(field));
-        
+
         field = GenericCollectionTypeResolverDemo.class.getDeclaredField("strings");
         System.out.println(GenericCollectionTypeResolver.getCollectionFieldType(field));
     }
