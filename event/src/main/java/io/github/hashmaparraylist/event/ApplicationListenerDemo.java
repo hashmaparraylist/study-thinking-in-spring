@@ -1,6 +1,8 @@
 package io.github.hashmaparraylist.event;
 
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
@@ -20,7 +22,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @see EventListener
  */
 @EnableAsync
-public class ApplicationListenerDemo {
+public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
 
     public static void main(String[] args) {
 //        GenericApplicationContext context = new GenericApplicationContext();
@@ -45,12 +47,22 @@ public class ApplicationListenerDemo {
 
         // 方法二 基于 Spring 注解: @EventListener
 
+        // ApplicationMultiCaster
+
         // 启动 Spring 应用上下文
         context.refresh();
         // 启动 Spring 应用上下文
         context.start();
         // 关闭 Spring 应用上下文
         context.close();
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        applicationEventPublisher.publishEvent(new ApplicationEvent("Hello, world!") {
+        });
+
+        applicationEventPublisher.publishEvent("Hello, world!");
     }
 
     static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
