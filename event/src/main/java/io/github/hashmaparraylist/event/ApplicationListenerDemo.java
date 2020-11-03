@@ -31,12 +31,17 @@ public class ApplicationListenerDemo {
         context.register(ApplicationListenerDemo.class);
 
         // 方法一 基于 Spring 接口 : 向 Spring 应用上下文注册事件
+        // a方法: 基于 ConfigurableApplicationContext API 来注册
         context.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
             @Override
             public void onApplicationEvent(ApplicationEvent event) {
-                println("接收到 Spring 事件: " + event);
+                println("ApplicationListener - 接收到 Spring 事件: " + event);
             }
         });
+
+        // b方法: 基于 ApplicationListener 注册为 Spring Bean
+        // 将 MyApplicationListener 作为 Configuration Class
+        context.register(MyApplicationListener.class);
 
         // 方法二 基于 Spring 注解: @EventListener
 
@@ -46,6 +51,13 @@ public class ApplicationListenerDemo {
         context.start();
         // 关闭 Spring 应用上下文
         context.close();
+    }
+
+    static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
+        @Override
+        public void onApplicationEvent(ContextRefreshedEvent event) {
+            println("MyApplicationListener - 接收到 Spring 事件: " + event);
+        }
     }
 
     @EventListener
