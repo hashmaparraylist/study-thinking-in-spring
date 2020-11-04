@@ -1,9 +1,6 @@
 package io.github.hashmaparraylist.event;
 
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -50,11 +47,13 @@ public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
         // ApplicationMultiCaster
 
         // 启动 Spring 应用上下文
-        context.refresh();
-        // 启动 Spring 应用上下文
-        context.start();
+        context.refresh();      // ContextRefreshedEvent
+        // 启动 Spring 上下文
+        context.start();        // ContextStartedEvent
+        // 停止 Spring 上下文
+        context.stop();         // ContextStoppedEvent
         // 关闭 Spring 应用上下文
-        context.close();
+        context.close();        // ContextClosedEvent
     }
 
     @Override
@@ -63,12 +62,26 @@ public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
         });
 
         applicationEventPublisher.publishEvent("Hello, world!");
+        applicationEventPublisher.publishEvent(new MyPayloadApplicationEvent(this,"Hello, world!"));
     }
 
     static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
         @Override
         public void onApplicationEvent(ContextRefreshedEvent event) {
             println("MyApplicationListener - 接收到 Spring 事件: " + event);
+        }
+    }
+
+    static class MyPayloadApplicationEvent<String> extends PayloadApplicationEvent<String> {
+
+        /**
+         * Create a new PayloadApplicationEvent.
+         *
+         * @param source  the object on which the event initially occurred (never {@code null})
+         * @param payload the payload object (never {@code null})
+         */
+        public MyPayloadApplicationEvent(Object source, String payload) {
+            super(source, payload);
         }
     }
 
