@@ -3,7 +3,6 @@ package io.github.hashmaparraylist.event;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
