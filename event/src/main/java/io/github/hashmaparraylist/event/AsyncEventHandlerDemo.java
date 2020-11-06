@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
 import java.util.concurrent.ExecutorService;
 
-import static java.util.concurrent.Executors.*;
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 /**
  * 基于实现类的异步事件处理器示例
@@ -51,7 +51,18 @@ public class AsyncEventHandlerDemo {
                     }
                 }
             });
+
+            simpleApplicationEventMulticaster.setErrorHandler(e -> {
+                System.err.println("当 Spring 事件异常时, 原因: " + e.getMessage());
+            });
         }
+
+        context.addApplicationListener(new ApplicationListener<MySpringEvent>() {
+            @Override
+            public void onApplicationEvent(MySpringEvent event) {
+                throw new RuntimeException("故障抛出异常");
+            }
+        });
 
 
         // 3. 发送自定义 Spring 事件
