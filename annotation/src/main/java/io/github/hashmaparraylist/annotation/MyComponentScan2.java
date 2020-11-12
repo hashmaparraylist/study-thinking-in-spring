@@ -21,10 +21,15 @@ public @interface MyComponentScan2 {
             // 多态，子注解提供新的属性方法引用"父"（元）注解中的属性方法
     String[] basePackages() default {};
 
+
     // @MyComponentScan2.basePackages
     //  -> @MyComponentScan.scanBasePackages
     //  -> @ComponentScan.basePackages
     //  -> @ComponentScan.value
 
+    // 元注解 @MyComponentScan 同名属性
+    String[] scanBasePackages() default {};
 
+    @AliasFor("scanBasePackages")
+    String[] packages() default {}; // packages 覆盖了 basePackages 同时也覆盖了元注解的 scanBasePackages
 }
