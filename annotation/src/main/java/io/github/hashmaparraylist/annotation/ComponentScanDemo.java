@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
  * @see Component
  * @see ComponentScan
  */
-@ComponentScan(basePackages = "io.github.hashmaparraylist.annotation")
+@MyComponentScan2(basePackages = "io.github.hashmaparraylist.annotation")
+//@ComponentScan(basePackages = "io.github.hashmaparraylist.annotation")
 public class ComponentScanDemo {
 
     public static void main(String[] args) {
