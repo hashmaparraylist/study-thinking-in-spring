@@ -25,7 +25,9 @@ public class ProfileDemo {
         // 默认 profiles = [ "odd" ]
         environment.setDefaultProfiles("odd");
         // 增加活跃 profiles
-        environment.addActiveProfile("even");
+//        environment.addActiveProfile("even");
+
+        // --Dspring.profiles.active=even
 
         context.refresh();
 
