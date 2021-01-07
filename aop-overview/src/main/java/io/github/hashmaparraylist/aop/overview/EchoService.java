@@ -6,5 +6,5 @@ package io.github.hashmaparraylist.aop.overview;
  * @since
  */
 public interface EchoService {
-    String echo (String message);
+    String echo (String message) throws NullPointerException;
 }
