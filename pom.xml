@@ -29,6 +29,7 @@
         <module>environment</module>
         <module>application-context-lifecycle</module>
         <module>questions</module>
+        <module>aop-overview</module>
     </modules>
 
     <properties>
