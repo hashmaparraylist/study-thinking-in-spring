@@ -10,6 +10,8 @@ import java.lang.reflect.Proxy;
  */
 public class JdkDynamicProxyDemo {
 
+    // class $Proxy 0 implements EchoService {}
+
     public static void main(String[] args) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         Object target = Proxy.newProxyInstance(classLoader, new Class[]{EchoService.class}, (proxy, method, methodArgs) -> {
@@ -22,5 +24,12 @@ public class JdkDynamicProxyDemo {
 
         EchoService echoService = (EchoService) target;
         echoService.echo("Hello, World");
+
+        // $Proxy1
+        Object proxy2 = Proxy.newProxyInstance(classLoader, new Class[] {Comparable.class}, (proxy1, method1, args1) -> {
+            return null;
+        });
+
+        System.out.println(proxy2);
     }
 }
