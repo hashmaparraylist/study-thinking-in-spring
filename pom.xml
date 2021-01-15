@@ -30,6 +30,7 @@
         <module>application-context-lifecycle</module>
         <module>questions</module>
         <module>aop-overview</module>
+        <module>aop-features</module>
     </modules>
 
     <properties>
