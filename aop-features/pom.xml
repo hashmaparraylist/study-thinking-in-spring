@@ -23,6 +23,12 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>aop-overview</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 

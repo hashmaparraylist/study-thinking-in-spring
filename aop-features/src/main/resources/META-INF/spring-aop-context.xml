@@ -12,4 +12,16 @@
 
     <aop:aspectj-autoproxy />
 
+    <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService" />
+
+    <bean id="echoServiceMethodInterceptor"
+          class="io.github.hashmaparraylist.aop.features.Interceptor.EchoServiceMethodInterceptor" />
+
+    <bean id="echoServiceProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetName" value="echoService" />
+        <property name="interceptorNames">
+            <value>echoServiceMethodInterceptor</value>
+        </property>
+    </bean>
+
 </beans>
