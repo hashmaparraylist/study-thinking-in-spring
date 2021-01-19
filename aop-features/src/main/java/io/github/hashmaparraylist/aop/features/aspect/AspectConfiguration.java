@@ -1,6 +1,8 @@
 package io.github.hashmaparraylist.aop.features.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * TODO
@@ -10,4 +12,15 @@ import org.aspectj.lang.annotation.Aspect;
  */
 @Aspect
 public class AspectConfiguration {
+
+    @Pointcut("execution(public * *(               是..))")
+    private void anyPublicMethod() {
+        System.out.println("@Pointcut any public method.");
+    }
+
+    @Before("anyPPublicMethod()")
+    public void beforeAnyPublicMethod() {
+        System.out.println("@Before any public method");
+    }
+
 }
