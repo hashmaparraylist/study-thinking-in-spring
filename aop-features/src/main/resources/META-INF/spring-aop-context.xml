@@ -11,6 +11,13 @@
         https://www.springframework.org/schema/context/spring-context.xsd">
 
     <aop:aspectj-autoproxy />
+    <bean id="aspectXmlConfig" class="io.github.hashmaparraylist.aop.features.aspect.AspectXmlConfig" />
+    <aop:config>
+        <aop:aspect id="AspectXmlConfig" ref="aspectXmlConfig" >
+            <aop:pointcut id="anyPublicMethod" expression="execution(public * *(..))"/>
+            <aop:before method="beforeAnyPublicMethod" pointcut-ref="anyPublicMethod" />
+        </aop:aspect>
+    </aop:config>
 
     <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService" />
 

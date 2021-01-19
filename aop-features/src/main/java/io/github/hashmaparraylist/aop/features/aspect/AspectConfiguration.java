@@ -13,12 +13,12 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class AspectConfiguration {
 
-    @Pointcut("execution(public * *(               是..))")
+    @Pointcut("execution(public * *(..))")
     private void anyPublicMethod() {
         System.out.println("@Pointcut any public method.");
     }
 
-    @Before("anyPPublicMethod()")
+    @Before("anyPublicMethod()")
     public void beforeAnyPublicMethod() {
         System.out.println("@Before any public method");
     }
