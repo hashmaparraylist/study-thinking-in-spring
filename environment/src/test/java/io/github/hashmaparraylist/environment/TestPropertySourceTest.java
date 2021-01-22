@@ -38,7 +38,7 @@ public class TestPropertySourceTest {
 
         MutablePropertySources propertySources = environment.getPropertySources();
 
-        for (PropertySource ps : =propertySources) {
+        for (PropertySource ps : propertySources) {
             System.out.printf("PropertySource(name=%s) 'user.name' 属性 %s\n", ps.getName(), ps.getProperty("user.name"));
         }
     }

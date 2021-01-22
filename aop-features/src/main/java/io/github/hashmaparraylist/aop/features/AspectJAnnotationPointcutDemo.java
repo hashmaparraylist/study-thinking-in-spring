@@ -1,6 +1,7 @@
 package io.github.hashmaparraylist.aop.features;
 
 import io.github.hashmaparraylist.aop.features.aspect.AspectConfiguration;
+import io.github.hashmaparraylist.aop.features.aspect.AspectConfiguration2;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class AspectJAnnotationPointcutDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(AspectJAnnotationPointcutDemo.class, AspectConfiguration.class);
+        context.register(AspectJAnnotationPointcutDemo.class, AspectConfiguration.class, AspectConfiguration2.class);
         context.refresh();
 
         AspectJAnnotationPointcutDemo aspectJAnnotationDemo = context.getBean(AspectJAnnotationPointcutDemo.class);
