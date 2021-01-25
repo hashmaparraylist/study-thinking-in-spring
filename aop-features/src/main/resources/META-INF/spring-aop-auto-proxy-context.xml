@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService" />
+
+    <!-- Advice Bean = MethodInterceptor Bean -->
+    <bean id="echoServiceMethodInterceptor"
+          class="io.github.hashmaparraylist.aop.features.Interceptor.EchoServiceMethodInterceptor" />
+
+<!--    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">-->
+<!--        <property name="beanNames" value="echo*">-->
+<!--        </property>-->
+<!--        <property name="interceptorNames">-->
+<!--            <value>echoServiceMethodInterceptor</value>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <!-- Autoproxy Bean -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+
+    <!-- Pointcut Bean -->
+    <bean id="echoServicePointcut"
+          class="io.github.hashmaparraylist.aop.features.pointcut.EchoServicePointcut">
+        <constructor-arg index="0" value="echo" />
+        <constructor-arg index="1" value="io.github.hashmaparraylist.aop.overview.EchoService" />
+    </bean>
+
+    <!-- PointcutAdvisor Bean -->
+    <bean class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <constructor-arg ref="echoServicePointcut" index="0" />
+        <constructor-arg ref="echoServiceMethodInterceptor" index="1" />
+    </bean>
+
+</beans>
