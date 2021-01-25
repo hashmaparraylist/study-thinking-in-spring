@@ -2,6 +2,7 @@ package io.github.hashmaparraylist.aop.features;
 
 import io.github.hashmaparraylist.aop.features.aspect.AspectConfiguration;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -31,7 +32,21 @@ public class AspectJAnnotationUsingAPIDemo {
             @Override
             public void before(Method method, Object[] args, Object target) throws Throwable {
                 if ("put".equals(method.getName()) && args.length == 2) {
-                    System.out.printf("当前存放是 Key : %s , Value : %s \n", args[0], args[1]);
+                    System.out.printf("[MethodBeforeAdvice] 当前存放是 Key : %s , Value : %s \n", args[0], args[1]);
+                }
+            }
+        });
+
+        // 添加 AfterReturningAdvice
+        proxyFactory.addAdvice(new AfterReturningAdvice() {
+            @Override
+            public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+                if ("put".equals(method.getName()) && args.length == 2) {
+                    System.out.printf("[AfterReturningAdvice] 当前存放是 Key : %s , 新存放的 Value : %s , 之前关联的 Value : %s \n",
+                            args[0],        // key
+                            args[1],        // new value
+                            returnValue     // old value
+                    );
                 }
             }
         });
@@ -41,6 +56,7 @@ public class AspectJAnnotationUsingAPIDemo {
         // 通过代理对象存储
         Map<String, Object> proxy = proxyFactory.getProxy();
         proxy.put("1", "A");
+        proxy.put("1", "B");
         System.out.println(cache.get("1"));
     }
 }
