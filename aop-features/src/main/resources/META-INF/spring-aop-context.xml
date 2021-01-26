@@ -26,6 +26,10 @@
 
     <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService" />
 
+    <bean id="targetSource" class="org.springframework.aop.target.HotSwappableTargetSource" >
+        <constructor-arg ref="echoService" />
+    </bean>
+
     <bean id="echoServiceMethodInterceptor"
           class="io.github.hashmaparraylist.aop.features.Interceptor.EchoServiceMethodInterceptor" />
 
@@ -34,6 +38,7 @@
         <property name="interceptorNames">
             <value>echoServiceMethodInterceptor</value>
         </property>
+        <property name="targetSource" ref="targetSource" />
     </bean>
 
 </beans>
