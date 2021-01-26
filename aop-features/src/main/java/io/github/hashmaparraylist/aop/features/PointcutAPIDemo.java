@@ -1,7 +1,7 @@
 package io.github.hashmaparraylist.aop.features;
 
 import io.github.hashmaparraylist.aop.features.Interceptor.EchoServiceMethodInterceptor;
-import io.github.hashmaparraylist.aop.features.pointcut.EchoServicePointcut;
+import io.github.hashmaparraylist.aop.features.pointcut.EchoServiceEchoMethodPointcut;
 import io.github.hashmaparraylist.aop.overview.DefaultEchoService;
 import io.github.hashmaparraylist.aop.overview.EchoService;
 import org.springframework.aop.framework.ProxyFactory;
@@ -15,7 +15,8 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
  */
 public class PointcutAPIDemo {
     public static void main(String[] args) {
-        EchoServicePointcut pointcut = new EchoServicePointcut("echo", EchoService.class);
+//        EchoServicePointcut pointcut = new EchoServicePointcut("echo", EchoService.class);
+        EchoServiceEchoMethodPointcut pointcut = EchoServiceEchoMethodPointcut.INSTANCE;
 
         // 将 Pointcut 适配成 Advisor
         DefaultPointcutAdvisor advisor =
