@@ -28,6 +28,10 @@ public class AspectConfiguration {
     @Before("anyPublicMethod()")
     public void beforeAnyPublicMethod() throws Throwable {
         System.out.println("@Before any public method");
+        Random random = new Random();
+        if (random.nextBoolean()) {
+            throw new RuntimeException("For purpose");
+        }
     }
 
     @After("anyPublicMethod()")
