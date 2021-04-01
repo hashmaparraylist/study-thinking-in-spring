@@ -24,7 +24,11 @@
         </aop:aspect>
     </aop:config>
 
-    <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService" />
+    <aop:scoped-proxy proxy-target-class="true" />
+
+    <bean id="echoService" class="io.github.hashmaparraylist.aop.overview.DefaultEchoService">
+        <aop:scoped-proxy />
+    </bean>
 
     <bean id="targetSource" class="org.springframework.aop.target.HotSwappableTargetSource" >
         <constructor-arg ref="echoService" />
